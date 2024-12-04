@@ -34,6 +34,7 @@ function App() {
   const [finalQuestionList, setFinalQuestionList] = useState<Question[]>([]);
   const [testType, setTestType] = useState<number>(2); // 0 => all questions 1=> randomised questions
   const [deviceType, setDeviceType] = useState<string>("");
+  const [showCorrectAnswer, setShowCorrectAnswer] = useState<boolean>(false);
 
   const handleStartTestClick = () => {
     setTestStarted(true);
@@ -44,6 +45,7 @@ function App() {
 
   const handleTestRestart = () => {
     setTestStarted(false);
+    setShowCorrectAnswer(false);
 
     if (testType === 0) {
       setFinalQuestionList(questionList);
@@ -149,22 +151,36 @@ function App() {
         </div>
       </div>
 
-      <div className={`relative flex flex-col items-center justify-center gap-y-10 pt-10 border-t-[1px] border-black/50 w-10/12`}>
-        {testType === 0 && testStarted
-          && <button
+      {testStarted && <div className={`relative flex flex-col items-center justify-center gap-y-10 pt-10 border-t-[1px] border-black/50 w-10/12`}>
+        <div className="flex flex-row items-center justify-between w-full">
+          {testType === 0
+            && <button
+              className={`bg-teal-300 rounded-xl py-4 px-6 shadow-2xl shadow-black/50 hover:scale-105 active:scale-90 transition-all duration-200 cursor-pointer scale-100`}
+              onClick={() => {
+                setTestStarted(false);
+                setFinalQuestionList(getQuestionList(219))
+                setTimeout(() => {
+                  setTestStarted(true);
+                }, 50)
+              }}
+            >
+              Randomise questions
+            </button>
+          }
+
+          <button
             className={`bg-teal-300 rounded-xl py-4 px-6 shadow-2xl shadow-black/50 hover:scale-105 active:scale-90 transition-all duration-200 cursor-pointer scale-100`}
             onClick={() => {
-              setTestStarted(false);
-              setFinalQuestionList(getQuestionList(219))
-              setTimeout(() => {
-                setTestStarted(true);
-              }, 50)
+              setShowCorrectAnswer((prev) => !prev);
+              // setTimeout(() => {
+              //   setTestStarted(true);
+              // }, 50)
             }}
           >
-            Randomise questions
+            {showCorrectAnswer ? "Hide" : "Show"} correct options
           </button>
-        }
-        {testStarted && finalQuestionList.map((question, index) => {
+        </div>
+        {finalQuestionList.map((question, index) => {
           return (
             <QuestionCard
               key={index}
@@ -172,10 +188,11 @@ function App() {
               options={question.options}
               correct={question.correct}
               index={index}
+              showCorrectAnswer={showCorrectAnswer}
             />
           )
         })}
-      </div>
+      </div>}
       <Footer />
     </div>
 

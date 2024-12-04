@@ -6,8 +6,9 @@ interface QuestionCardProps {
   options: string[];
   correct: number;
   index: number;
+  showCorrectAnswer: boolean;
 }
-function QuestionCard({ question, options, correct, index }: QuestionCardProps) {
+function QuestionCard({ question, options, correct, index, showCorrectAnswer = false }: QuestionCardProps) {
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [isOptionCorrect, setIsOptionCorrect] = useState<boolean>(false);
   const [randomisedOptions, setRandomisedOptions] = useState<string[]>([]);
@@ -27,15 +28,21 @@ function QuestionCard({ question, options, correct, index }: QuestionCardProps) 
   }
 
   const getCorrectOptionStyles = (optionName: string) => {
-    if (selectedOption === "") {
+    if (showCorrectAnswer && optionName === options[correct]) {
+      return "bg-green-500";
+    }
+    else if (showCorrectAnswer && optionName !== options[correct]) {
+      return "bg-teal-200 opacity-50"
+    }
+    else if (selectedOption === "") {
       return "bg-teal-200";
     }
-    if (optionName === options[correct]) {
+    else if (optionName === options[correct]) {
       return "bg-green-500";
-    } else if (optionName === selectedOption) {
-      return "bg-red-500"
     }
-    else {
+    else if (optionName === selectedOption) {
+      return "bg-red-500"
+    } else {
       return "bg-teal-200 opacity-50"
     }
 
@@ -57,16 +64,19 @@ function QuestionCard({ question, options, correct, index }: QuestionCardProps) 
         <p className="text-xl">{question}</p>
         <div className={`${selectedOption === "" ? "scale-0" : "scale-100"} transition-all duration-300 w-auto h-auto`}>
           {
-            isOptionCorrect && selectedOption !== "" ? <Check className="bg-green-500 rounded-full " /> : <CircleX className="bg-red-500 rounded-full" />
+            showCorrectAnswer ? "" : isOptionCorrect && selectedOption !== "" ? <Check className="bg-green-500 rounded-full " /> : <CircleX className="bg-red-500 rounded-full" />
           }
         </div>
+      </div>
+      <div>
+        {selectedOption}
       </div>
       <div className="grid grid-rows-4 md:grid-rows-2 md:grid-cols-2 w-full place-items-center gap-4 pt-4 z-50">
         {randomisedOptions.map((option, index) => {
           return (
             <button
               key={index}
-              className={`${getCorrectOptionStyles(option)} text-xs md:text-lg w-full h-auto rounded-lg py-1 px-4  transition-all duration-400 ${selectedOption === "" ? "hover:scale-105 active:scale-95 scale-100 cusror-pointer" : "scale-95 cursor-not-allowed"}`}
+              className={`${getCorrectOptionStyles(option)} text-xs md:text-lg w-full h-auto rounded-lg py-1 px-4  transition-all duration-400 ${selectedOption === "" && !showCorrectAnswer ? "hover:scale-105 active:scale-95 scale-100 cusror-pointer" : "scale-95 cursor-not-allowed"}`}
               onClick={() => handleOptionClick(option)}
               value={option}
               disabled={selectedOption !== ""}
