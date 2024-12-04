@@ -25,6 +25,21 @@ function QuestionCard({ question, options, correct, index }: QuestionCardProps) 
     }
 
   }
+
+  const getCorrectOptionStyles = (optionName: string) => {
+    if (selectedOption === "") {
+      return "bg-teal-200";
+    }
+    if (optionName === options[correct]) {
+      return "bg-green-500";
+    } else if (optionName === selectedOption) {
+      return "bg-red-500"
+    }
+    else {
+      return "bg-teal-200 opacity-50"
+    }
+
+  }
   useEffect(() => {
     // Shuffle the array using Fisher-Yates algorithm
     let shuffledArray = options.slice(); // Create a copy of the array to preserve original
@@ -36,7 +51,7 @@ function QuestionCard({ question, options, correct, index }: QuestionCardProps) 
 
   }, [options])
   return (
-    <div className="relative flex flex-col items-start justify-center font-montserrat bg-teal-300 w-auto md:w-10/12 px-6 py-4 rounded-lg">
+    <div className="relative flex flex-col items-start justify-center font-montserrat bg-teal-300 w-10/12 px-6 py-4 rounded-lg">
       <p className="font-bold text-sm">Q{index + 1}</p>
       <div className="flex flex-row justify-between items-start w-full">
         <p className="text-xl">{question}</p>
@@ -46,25 +61,20 @@ function QuestionCard({ question, options, correct, index }: QuestionCardProps) 
           }
         </div>
       </div>
-      <div className="grid grid-rows-2 grid-cols-2 w-full place-items-center gap-4 pt-4">
+      <div className="grid grid-rows-4 md:grid-rows-2 md:grid-cols-2 w-full place-items-center gap-4 pt-4 z-50">
         {randomisedOptions.map((option, index) => {
           return (
-            <div
+            <button
               key={index}
-              className={`bg-teal-200 text-xs md:text-medium w-auto h-auto rounded-lg py-2 px-4  transition-all duration-400 ${selectedOption === "" ? "hover:scale-105 active:scale-95 scale-100 cusror-pointer" : "scale-95 cursor-not-allowed opacity-50"}`}
+              className={`${getCorrectOptionStyles(option)} text-xs md:text-lg w-full h-auto rounded-lg py-1 px-4  transition-all duration-400 ${selectedOption === "" ? "hover:scale-105 active:scale-95 scale-100 cusror-pointer" : "scale-95 cursor-not-allowed"}`}
               onClick={() => handleOptionClick(option)}
-            // disabled={selectedOption !== ""}
+              value={option}
+              disabled={selectedOption !== ""}
             >
               {option}
-            </div>
+            </button>
           )
         })}
-      </div>
-      <div
-        className={`bg-green-400 h-full w-48 top-0 right-0 absolute ${selectedOption === "" ? "opacity-0" : isOptionCorrect ? "translate-x-0 opacity-0" : "opacity-100 translate-x-44"} flex flex-col justify-center items-center transition-opacity duration-500 px-10 rounded-r-lg`}
-      >
-        The correct option is :
-        <strong>Option {correct + 1} : {options[correct]}</strong>
       </div>
     </div>
   )
