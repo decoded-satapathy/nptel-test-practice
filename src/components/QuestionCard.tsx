@@ -68,9 +68,6 @@ function QuestionCard({ question, options, correct, index, showCorrectAnswer = f
           }
         </div>
       </div>
-      <div>
-        {selectedOption}
-      </div>
       <div className="grid grid-rows-4 md:grid-rows-2 md:grid-cols-2 w-full place-items-center gap-4 pt-4 z-50">
         {randomisedOptions.map((option, index) => {
           return (
