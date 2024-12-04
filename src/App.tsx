@@ -55,7 +55,7 @@ function App() {
   }, [selectedValue])
 
   return (
-    <div className=" min-h-screen h-auto  w-full flex flex-col justify-between items-center font-montserrat gap-y-6 pt-20">
+    <div className=" min-h-screen h-auto  w-10/12 flex flex-col justify-between items-center font-montserrat gap-y-6 pt-20">
       <div className="flex flex-col justify-center items-center gap-y-6 pb-10">
         <h3 className="text-4xl font-bold">Welcome to you're IOT test simulator.</h3>
         <h4 className="text-xl font-semibold">Good luck to you</h4>
