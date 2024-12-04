@@ -74,28 +74,30 @@ function App() {
     <div className=" min-h-screen h-auto  w-10/12 flex flex-col justify-between items-center font-montserrat gap-y-6 pt-20">
       <div className="flex flex-col justify-center items-center gap-y-6 pb-10">
         <h3 className="text-4xl font-bold text-center">Welcome to you're practice IOT tests.</h3>
-        <h4 className="text-xl font-semibold flex flex-col md:flex-row gap-x-2 justify-center items-center">
+        <h4 className="text-xl font-semibold flex flex-col md:flex-row justify-center items-center">
           <div>
             Good luck to you!
           </div>
-          <a
-            href="https://chat.whatsapp.com/FZUTlD0EvF2ASq6RNMGnH2"
-            target="_blank"
-            className="text-blue-600 font-medium underline"
-          >
-            Cu Connect
-          </a>
-          <div>X</div>
-          <a
-            className="text-blue-600 font-medium underline hover:text-accentColor-200 text-accentColor/50 dark:text-accentColor dark:hover:text-accentColor-200 transition-all duration-500"
-            href={`${deviceType === "mobile"
-              ? "https://github.com/decoded-satapathy"
-              : "https://decoded-satapathy-portfolio.vercel.app"
-              }`}
-            target="_blank"
-          >
-            Om
-          </a>
+          <div className="flex flex-row items-center justify-center gap-x-2 pl-0 md:pl-2">
+            <a
+              href="https://chat.whatsapp.com/FZUTlD0EvF2ASq6RNMGnH2"
+              target="_blank"
+              className="text-blue-600 font-medium underline"
+            >
+              Cu Connect
+            </a>
+            <div>X</div>
+            <a
+              className="text-blue-600 font-medium underline hover:text-accentColor-200 text-accentColor/50 dark:text-accentColor dark:hover:text-accentColor-200 transition-all duration-500"
+              href={`${deviceType === "mobile"
+                ? "https://github.com/decoded-satapathy"
+                : "https://decoded-satapathy-portfolio.vercel.app"
+                }`}
+              target="_blank"
+            >
+              Om
+            </a>
+          </div>
         </h4>
 
 

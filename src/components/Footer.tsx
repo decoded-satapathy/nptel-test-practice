@@ -20,13 +20,13 @@ const Footer = () => {
   }, [deviceType]);
 
   return (
-    <section className="c-space border-t border-black/70 pt-7 pb-3 flex flex-row justify-between items-center w-10/12 px-4">
-      <div className="flex justify-center items-center">
-        <div className="text-gray-700 flex flex-col sm:flex-row items-center justify-center sm:items-center sm:justify-start">
-          <p>
+    <section className="c-space border-t border-black/70 pt-7 pb-3 flex flex-row justify-between items-center w-screen md:w-10/12 px-4">
+      <div className="flex flex-col justify-center items-start text-sm md:text-medium">
+        <div className="text-gray-700 flex flex-col items-start justify-center">
+          <p className="">
             Developed by{" "}
             <a
-              className="underline hover:text-accentColor-200 text-accentColor/50 dark:text-accentColor dark:hover:text-accentColor-200 transition-all duration-500"
+              className="text-blue-600 font-medium underline"
               href={`${deviceType === "mobile"
                 ? "https://github.com/decoded-satapathy"
                 : "https://decoded-satapathy-portfolio.vercel.app"
@@ -36,8 +36,19 @@ const Footer = () => {
               OM SATAPATHY
             </a>
           </p>
-          <p className="pl-2">with ❤️</p>
+
+          <p className="">
+            Parterned by{" "}
+            <a
+              href="https://chat.whatsapp.com/FZUTlD0EvF2ASq6RNMGnH2"
+              target="_blank"
+              className="text-blue-600 font-medium underline"
+            >
+              CU CONNECT
+            </a>
+          </p>
         </div>
+        <p className="">with ❤️</p>
       </div>
       <div className="flex gap-3">
         <a
