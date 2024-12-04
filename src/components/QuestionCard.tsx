@@ -36,7 +36,7 @@ function QuestionCard({ question, options, correct, index }: QuestionCardProps) 
 
   }, [options])
   return (
-    <div className="relative flex flex-col items-start justify-center font-montserrat bg-teal-300 w-10/12 px-6 py-4 rounded-lg">
+    <div className="relative flex flex-col items-start justify-center font-montserrat bg-teal-300 w-auto md:w-10/12 px-6 py-4 rounded-lg">
       <p className="font-bold text-sm">Q{index + 1}</p>
       <div className="flex flex-row justify-between items-start w-full">
         <p className="text-xl">{question}</p>
@@ -49,15 +49,14 @@ function QuestionCard({ question, options, correct, index }: QuestionCardProps) 
       <div className="grid grid-rows-2 grid-cols-2 w-full place-items-center gap-4 pt-4">
         {randomisedOptions.map((option, index) => {
           return (
-            <button
+            <div
               key={index}
-              className={`relative bg-teal-200 w-full rounded-lg py-2 px-4  transition-all duration-400 ${selectedOption === "" ? "hover:scale-105 active:scale-95 scale-100" : "scale-95 cursor-not-allowed opacity-50"}`}
+              className={`bg-teal-200 text-xs md:text-medium w-auto h-auto rounded-lg py-2 px-4  transition-all duration-400 ${selectedOption === "" ? "hover:scale-105 active:scale-95 scale-100 cusror-pointer" : "scale-95 cursor-not-allowed opacity-50"}`}
               onClick={() => handleOptionClick(option)}
-              value={option}
-              disabled={selectedOption !== ""}
+            // disabled={selectedOption !== ""}
             >
               {option}
-            </button>
+            </div>
           )
         })}
       </div>
