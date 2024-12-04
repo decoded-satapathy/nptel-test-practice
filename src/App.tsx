@@ -33,6 +33,7 @@ function App() {
   const [testStarted, setTestStarted] = useState<boolean>(false);
   const [finalQuestionList, setFinalQuestionList] = useState<Question[]>([]);
   const [testType, setTestType] = useState<number>(2); // 0 => all questions 1=> randomised questions
+  const [deviceType, setDeviceType] = useState<string>("");
 
   const handleStartTestClick = () => {
     setTestStarted(true);
@@ -48,6 +49,21 @@ function App() {
       setFinalQuestionList(questionList);
     }
   }
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+
+    if (
+      /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+        userAgent
+      )
+    ) {
+      setDeviceType("mobile");
+    } else if (/windows|macintosh|linux/i.test(userAgent)) {
+      setDeviceType("desktop");
+    } else {
+      setDeviceType("unknown");
+    }
+  }, [deviceType]);
 
 
   useEffect(() => {
@@ -57,12 +73,33 @@ function App() {
   return (
     <div className=" min-h-screen h-auto  w-10/12 flex flex-col justify-between items-center font-montserrat gap-y-6 pt-20">
       <div className="flex flex-col justify-center items-center gap-y-6 pb-10">
-        <h3 className="text-4xl font-bold">Welcome to you're IOT test simulator.</h3>
-        <h4 className="text-xl font-semibold">Good luck to you</h4>
+        <h3 className="text-4xl font-bold">Welcome to you're practice IOT tests.</h3>
+        <h4 className="text-xl font-semibold flex flex-row gap-x-2">
+          <div>
+            Good luck to you!
+          </div>
+          <a
+            href="https://chat.whatsapp.com/FZUTlD0EvF2ASq6RNMGnH2"
+            target="_blank"
+            className="text-blue-600 font-medium underline"
+          >
+            Cu Connect
+          </a>
+          <div>X</div>
+          <a
+            className="text-blue-600 font-medium underline hover:text-accentColor-200 text-accentColor/50 dark:text-accentColor dark:hover:text-accentColor-200 transition-all duration-500"
+            href={`${deviceType === "mobile"
+              ? "https://github.com/decoded-satapathy"
+              : "https://decoded-satapathy-portfolio.vercel.app"
+              }`}
+            target="_blank"
+          >
+            Om
+          </a>
+        </h4>
 
 
         <div className="flex flex-row items-center justify-center gap-x-6">
-
           <button
             className={`bg-teal-300 rounded-xl py-4 px-6 shadow-2xl shadow-black/50 ${testType === 0 ? "cursor-not-allowed opacity-50 scale-90 " : "cursor-pointer scale-100 hover:scale-105"} transition-all duration-200`}
             disabled={testType === 0}
@@ -92,7 +129,6 @@ function App() {
           We have currently {questionList.length} questions.
         </div>}
         <div className="flex flex-row items-center justify-center gap-x-6">
-
           <button
             className={`bg-teal-300 rounded-xl py-4 px-6 shadow-2xl shadow-black/50 ${testStarted || testType === 2 ? "cursor-not-allowed opacity-50 scale-90 " : "cursor-pointer scale-100 hover:scale-105"} transition-all duration-200`}
             disabled={testType !== 2 && testStarted}
