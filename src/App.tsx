@@ -138,7 +138,7 @@ function App() {
           </button>
 
           <button
-            className={`bg-teal-300 rounded-xl py-4 px-6 shadow-2xl shadow-black/50 hover:scale-105 active:scale-90 transition-all duration-200 ${testType === 2 ? "cursor-not-allowed opacity-50 scale-90 " : "cursor-pointer scale-100 hover:scale-105"}`}
+            className={`bg-teal-300 rounded-xl py-4 px-6 shadow-2xl shadow-black/50 hover:scale-105 active:scale-90 transition-all duration-200 ${testType === 2 ? "cursor-not-allowed opacity-50 scale-90 " : "cursor-pointer scale-100"}`}
             onClick={handleTestRestart}
             disabled={testType === 2}
           >
