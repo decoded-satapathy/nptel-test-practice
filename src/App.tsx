@@ -42,23 +42,24 @@ function App() {
   const [deviceType, setDeviceType] = useState<string>("");
   const [showCorrectAnswer, setShowCorrectAnswer] = useState<boolean>(false);
   const [showGoToTop, setShowGoToTop] = useState<boolean>(false);
+  const [totalQuestions, setTotalQuestions] = useState<number>(0);
+  const [totalCorrectAnswers, setTotalCorrectAnswers] = useState<number>(0);
+  const [totalWrongAnswers, setTotalWrongAnswers] = useState<number>(0);
 
   const handleStartTestClick = () => {
     setTestStarted(true);
     if (testType === 0) {
       setFinalQuestionList(questionList);
+      setTotalQuestions(questionList.length);
     } else {
       setFinalQuestionList(getQuestionList(selectedValue));
+      setTotalQuestions(selectedValue);
     }
   }
 
   const handleTestRestart = () => {
     setTestStarted(false);
     setShowCorrectAnswer(false);
-
-    if (testType === 0) {
-      setFinalQuestionList(questionList);
-    }
   }
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -199,6 +200,29 @@ function App() {
             {showCorrectAnswer ? "Hide" : "Show"} correct options
           </button>
         </div>
+
+        {totalCorrectAnswers + totalWrongAnswers === totalQuestions
+          && <div
+            className="flex flex-row items-center justify-center md:justify-evenly w-full gap-x-4"
+          >
+            <p className="bg-green-500 rounded-lg py-2 px-4 shadow-2xl shadow-black/70 text-sm md:text-lg font-bold">
+              <div>
+                Correct : {totalCorrectAnswers}/{totalQuestions}
+              </div>
+              <div>
+                {(totalCorrectAnswers / totalQuestions) * 100}% Correct
+              </div>
+            </p>
+            <p className="bg-red-500 rounded-lg py-2 px-4 shadow-2xl shadow-black/70 text-sm md:text-lg font-bold">
+              <div>
+                Wrong : {totalWrongAnswers}/{totalQuestions}
+              </div>
+              <div>
+                {(totalWrongAnswers / totalQuestions) * 100}% Correct
+              </div>
+            </p>
+          </div>}
+
         {showGoToTop &&
           <ArrowUp
             className="sticky top-8  bg-teal-400 z-50 rounded-full animate-bounce border-2 border-gray-200 w-10 h-10 p-[6px] md:w-14 md:h-14 md:p-2"
@@ -218,12 +242,36 @@ function App() {
               correct={question.correct}
               index={index}
               showCorrectAnswer={showCorrectAnswer}
+              setTotalCorrectAnswers={setTotalCorrectAnswers}
+              setTotalWrongAnswers={setTotalWrongAnswers}
             />
           )
         })}
+
+        {totalCorrectAnswers + totalWrongAnswers === totalQuestions
+          && <div
+            className="flex flex-row items-center justify-center md:justify-evenly w-full gap-x-4"
+          >
+            <p className="bg-green-500 rounded-lg py-2 px-4 shadow-2xl shadow-black/70 text-sm md:text-lg font-bold">
+              <div>
+                Correct : {totalCorrectAnswers}/{totalQuestions}
+              </div>
+              <div>
+                {(totalCorrectAnswers / totalQuestions) * 100}% Correct
+              </div>
+            </p>
+            <p className="bg-red-500 rounded-lg py-2 px-4 shadow-2xl shadow-black/70 text-sm md:text-lg font-bold">
+              <div>
+                Wrong : {totalWrongAnswers}/{totalQuestions}
+              </div>
+              <div>
+                {(totalWrongAnswers / totalQuestions) * 100}% Correct
+              </div>
+            </p>
+          </div>}
       </div>}
       <Footer />
-    </div>
+    </div >
 
   )
 }

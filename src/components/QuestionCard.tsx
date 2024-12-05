@@ -1,5 +1,5 @@
 import { Check, CircleX } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface QuestionCardProps {
   question: string;
@@ -7,8 +7,12 @@ interface QuestionCardProps {
   correct: number;
   index: number;
   showCorrectAnswer: boolean;
+  setTotalCorrectAnswers: Dispatch<SetStateAction<number>>;
+  setTotalWrongAnswers: Dispatch<SetStateAction<number>>;
 }
-function QuestionCard({ question, options, correct, index, showCorrectAnswer = false }: QuestionCardProps) {
+
+
+function QuestionCard({ question, options, correct, index, showCorrectAnswer = false, setTotalCorrectAnswers, setTotalWrongAnswers }: QuestionCardProps) {
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [isOptionCorrect, setIsOptionCorrect] = useState<boolean>(false);
   const [randomisedOptions, setRandomisedOptions] = useState<string[]>([]);
@@ -21,8 +25,10 @@ function QuestionCard({ question, options, correct, index, showCorrectAnswer = f
   const checkAnswerCorrectness = (option: string) => {
     if (option === options[correct]) {
       setIsOptionCorrect(true);
+      setTotalCorrectAnswers((prev) => prev + 1);
     } else {
       setIsOptionCorrect(false);
+      setTotalWrongAnswers((prev) => prev + 1);
     }
 
   }
