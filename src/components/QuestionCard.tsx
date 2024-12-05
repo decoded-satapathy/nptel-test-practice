@@ -58,10 +58,10 @@ function QuestionCard({ question, options, correct, index, showCorrectAnswer = f
 
   }, [options])
   return (
-    <div className="relative flex flex-col items-start justify-center font-montserrat bg-teal-300 w-10/12 px-6 py-4 rounded-lg">
+    <div className="relative flex flex-col items-start justify-center font-montserrat bg-teal-300 w-full md:w-10/12 px-6 py-4 rounded-lg">
       <p className="font-bold text-sm">Q{index + 1}</p>
       <div className="flex flex-row justify-between items-start w-full">
-        <p className="text-xl">{question}</p>
+        <p className="text-lg md:text-xl">{question}</p>
         <div className={`${selectedOption === "" ? "scale-0" : "scale-100"} transition-all duration-300 w-auto h-auto`}>
           {
             showCorrectAnswer ? "" : isOptionCorrect && selectedOption !== "" ? <Check className="bg-green-500 rounded-full " /> : <CircleX className="bg-red-500 rounded-full" />
@@ -73,7 +73,7 @@ function QuestionCard({ question, options, correct, index, showCorrectAnswer = f
           return (
             <button
               key={index}
-              className={`${getCorrectOptionStyles(option)} text-xs md:text-lg w-full h-auto rounded-lg py-1 px-4  transition-all duration-400 ${selectedOption === "" && !showCorrectAnswer ? "hover:scale-105 active:scale-95 scale-100 cusror-pointer" : "scale-95 cursor-not-allowed"}`}
+              className={`${getCorrectOptionStyles(option)} text-sm md:text-lg w-full h-auto rounded-lg py-1 px-4  transition-all duration-400 ${selectedOption === "" && !showCorrectAnswer ? "hover:scale-105 active:scale-95 scale-100 cusror-pointer" : "scale-95 cursor-not-allowed"}`}
               onClick={() => handleOptionClick(option)}
               value={option}
               disabled={selectedOption !== ""}
