@@ -1,10 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import questionList from "../questionList"
 import DropdownList from "./components/DropdownList";
 import QuestionCard from "./components/QuestionCard";
 import Footer from "./components/Footer";
+import { useInView } from "react-intersection-observer";
+import { ArrowUp } from "lucide-react";
 
 function App() {
+
+  const { ref: mainSectionRef, inView: isMainsectionInView } = useInView({ threshold: 0 });
+
+  const topSectionRef = useRef<HTMLDivElement>(null)
 
   interface Question {
     question: string;
@@ -35,11 +41,14 @@ function App() {
   const [testType, setTestType] = useState<number>(2); // 0 => all questions 1=> randomised questions
   const [deviceType, setDeviceType] = useState<string>("");
   const [showCorrectAnswer, setShowCorrectAnswer] = useState<boolean>(false);
+  const [showGoToTop, setShowGoToTop] = useState<boolean>(false);
 
   const handleStartTestClick = () => {
     setTestStarted(true);
     if (testType === 0) {
       setFinalQuestionList(questionList);
+    } else {
+      setFinalQuestionList(getQuestionList(selectedValue));
     }
   }
 
@@ -67,14 +76,21 @@ function App() {
     }
   }, [deviceType]);
 
+  useEffect(() => {
+    setShowGoToTop(!isMainsectionInView);
+  }, [isMainsectionInView])
+
 
   useEffect(() => {
     setFinalQuestionList(getQuestionList(selectedValue));
   }, [selectedValue])
 
   return (
-    <div className="min-h-screen h-auto  w-11/12 md:w-9/12 flex flex-col justify-between items-center font-montserrat gap-y-6 pt-20">
-      <div className="flex flex-col justify-center items-center gap-y-6 pb-10">
+    <div className=" min-h-screen h-auto  w-11/12 md:w-9/12 flex flex-col justify-between items-center font-montserrat gap-y-6 pt-20">
+      <div
+        className="flex flex-col justify-center items-center gap-y-6 pb-10"
+        ref={topSectionRef}
+      >
         <h3 className="text-4xl font-bold text-center">Welcome to you're practice IOT tests.</h3>
         <h4 className="text-xl font-semibold flex flex-col md:flex-row justify-center items-center">
           <div>
@@ -151,8 +167,11 @@ function App() {
         </div>
       </div>
 
-      {testStarted && <div className={`relative flex flex-col items-center justify-center gap-y-10 pt-10 border-t-[1px] border-black/50 w-full md:w-10/12`}>
-        <div className="flex flex-row items-center justify-center md:justify-evenly w-full">
+      {testStarted && <div className={`relative flex flex-col items-center justify-center gap-y-10 pt-10 border-t-[1px] border-black/50 w-full md:w-10/12 `}>
+        <div
+          className="flex flex-row items-center justify-center md:justify-evenly w-full"
+          ref={mainSectionRef}
+        >
           {testType === 0
             && <button
               className={`bg-teal-300 rounded-xl py-4 px-6 shadow-2xl shadow-black/50 hover:scale-95 active:scale-85 md:hover:scale-105 md:active:scale-90 transition-all duration-200 cursor-pointer md:scale-100 text-sm md:text-lg scale-90`}
@@ -180,6 +199,16 @@ function App() {
             {showCorrectAnswer ? "Hide" : "Show"} correct options
           </button>
         </div>
+        {showGoToTop &&
+          <ArrowUp
+            className="sticky top-8  bg-teal-400 z-50 rounded-full animate-bounce border-2 border-gray-200 w-10 h-10 p-[6px] md:w-14 md:h-14 md:p-2"
+            onClick={() => {
+              const sectionYPos = topSectionRef?.current?.getBoundingClientRect().y;
+              window.scrollBy({ top: sectionYPos, left: 0, behavior: "smooth" });
+            }
+            }
+          />
+        }
         {finalQuestionList.map((question, index) => {
           return (
             <QuestionCard
