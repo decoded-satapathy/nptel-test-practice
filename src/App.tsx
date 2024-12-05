@@ -60,6 +60,8 @@ function App() {
   const handleTestRestart = () => {
     setTestStarted(false);
     setShowCorrectAnswer(false);
+    setTotalCorrectAnswers(0);
+    setTotalWrongAnswers(0);
   }
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -201,7 +203,7 @@ function App() {
           </button>
         </div>
 
-        {totalCorrectAnswers + totalWrongAnswers === totalQuestions
+        {totalCorrectAnswers + totalWrongAnswers === totalQuestions && !showCorrectAnswer
           && <div
             className="flex flex-row items-center justify-center md:justify-evenly w-full gap-x-4"
           >
@@ -248,7 +250,7 @@ function App() {
           )
         })}
 
-        {totalCorrectAnswers + totalWrongAnswers === totalQuestions
+        {totalCorrectAnswers + totalWrongAnswers === totalQuestions && !showCorrectAnswer
           && <div
             className="flex flex-row items-center justify-center md:justify-evenly w-full gap-x-4"
           >
