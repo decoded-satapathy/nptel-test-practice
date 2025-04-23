@@ -19,7 +19,7 @@ function App() {
 function MainEndpoint() {
   const navigate = useNavigate();
   return (
-    <div className=" min-h-screen h-auto  w-11/12 md:w-9/12 flex flex-col justify-between items-center font-montserrat gap-y-6 pt-20">
+    <div className="min-h-screen h-auto  w-11/12 md:w-9/12 flex flex-col justify-between items-center font-montserrat gap-y-6 pt-20">
       <h1 className="text-2xl md:text-4xl font-bold font-montserrat text-center underline">
         Welcome to NPTEL Practice tests
       </h1>

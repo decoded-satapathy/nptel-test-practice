@@ -17,7 +17,6 @@ function DropdownList({ selectedValue, setSelectedValue, isDisabled }: { selecte
       <option value={70}>70</option>
       <option value={80}>80</option>
       <option value={90}>90</option>
-      <option value={100}>100</option>
     </select >
 
   )
