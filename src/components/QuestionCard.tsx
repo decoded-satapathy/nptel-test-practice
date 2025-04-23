@@ -1,4 +1,5 @@
 import { Check, CircleX } from "lucide-react";
+import React from "react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface QuestionCardProps {
@@ -63,11 +64,26 @@ function QuestionCard({ question, options, correct, index, showCorrectAnswer = f
     setRandomisedOptions(shuffledArray.slice(0, 4));
 
   }, [options])
+
+  const parseString = (inputString: string) => {
+    const formattedText = inputString.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        {index < inputString.split('\n').length - 1 && <br />}
+      </React.Fragment>
+    ));
+    return (
+      <div>
+        {formattedText}
+      </div>
+    );
+  };
+
   return (
     <div className="relative flex flex-col items-start justify-center font-montserrat bg-teal-300 w-full md:w-10/12 px-6 py-4 rounded-lg">
       <p className="font-bold text-sm">Q{index + 1}</p>
       <div className="flex flex-row justify-between items-start w-full">
-        <p className="text-lg md:text-xl">{question}</p>
+        <p className="text-lg md:text-xl">{parseString(question)}</p>
         <div className={`${selectedOption === "" ? "scale-0" : "scale-100"} transition-all duration-300 w-auto h-auto`}>
           {
             showCorrectAnswer ? "" : isOptionCorrect && selectedOption !== "" ? <Check className="bg-green-500 rounded-full " /> : <CircleX className="bg-red-500 rounded-full" />

@@ -36,17 +36,6 @@ const Footer = () => {
               OM SATAPATHY
             </a>
           </p>
-
-          <p className="">
-            Parterned by{" "}
-            <a
-              href="https://chat.whatsapp.com/FZUTlD0EvF2ASq6RNMGnH2"
-              target="_blank"
-              className="text-blue-600 font-medium underline"
-            >
-              CU CONNECT
-            </a>
-          </p>
         </div>
         <p className="">with ❤️</p>
       </div>
