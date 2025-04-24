@@ -172,7 +172,7 @@ function TestPage({ subjectName, questionList }: { subjectName: string, question
               className={`bg-teal-300 rounded-xl py-4 px-6 shadow-2xl shadow-black/50 hover:scale-95 active:scale-85 md:hover:scale-105 md:active:scale-90 transition-all duration-200 cursor-pointer md:scale-100 text-sm md:text-lg scale-90`}
               onClick={() => {
                 setTestStarted(false);
-                setFinalQuestionList(getQuestionList(219))
+                setFinalQuestionList(getQuestionList(questionList.length))
                 setTimeout(() => {
                   setTestStarted(true);
                 }, 50)
