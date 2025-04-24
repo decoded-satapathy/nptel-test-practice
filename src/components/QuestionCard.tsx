@@ -95,7 +95,7 @@ function QuestionCard({ question, options, correct, index, showCorrectAnswer = f
           return (
             <button
               key={index}
-              className={`${getCorrectOptionStyles(option)} text-sm md:text-lg w-full h-auto rounded-lg py-1 px-4  transition-all duration-400 ${selectedOption === "" && !showCorrectAnswer ? "hover:scale-105 active:scale-95 scale-100 cusror-pointer" : "scale-95 cursor-not-allowed"}`}
+              className={`${getCorrectOptionStyles(option)} text-sm md:text-lg w-full h-full rounded-lg py-1 px-4  transition-all duration-400 ${selectedOption === "" && !showCorrectAnswer ? "hover:scale-105 active:scale-95 scale-100 cusror-pointer" : "scale-95 cursor-not-allowed"}`}
               onClick={() => handleOptionClick(option)}
               value={option}
               disabled={selectedOption !== ""}
