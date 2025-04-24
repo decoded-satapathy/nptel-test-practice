@@ -2575,7 +2575,7 @@ const iotMLEdgeQuestions = [
       "A virtualization hypervisor for running multiple operating systems",
       "A CPU-only compute service for training complex deep learning models"
     ],
-    correct: 2
+    correct: 1
   },
   {
     question: "In Kubernetes, which component assigns pods to nodes?",
@@ -2655,7 +2655,7 @@ const iotMLEdgeQuestions = [
       "Edge locations to deliver content to end users",
       "Virtual networks defined by customers"
     ],
-    correct: 2
+    correct: 1
   },
   {
     question: "What is the main difference between PAMDP and MDP?",
@@ -2935,7 +2935,7 @@ Statements:\n
       "Device Gateway",
       "Device Registry"
     ],
-    correct: 2
+    correct: 1
   },
   {
     question: "Which communication protocols does AWS IoT Core predominantly use?",
