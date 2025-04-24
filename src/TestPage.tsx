@@ -219,7 +219,7 @@ function TestPage({ subjectName, questionList }: { subjectName: string, question
 
         {showGoToTop &&
           <ArrowUp
-            className="sticky top-8  bg-teal-400 z-50 rounded-full animate-bounce border-2 border-gray-200 w-10 h-10 p-[6px] md:w-14 md:h-14 md:p-2"
+            className="cursor-pointer sticky top-8  bg-teal-400 z-50 rounded-full animate-bounce border-2 border-gray-200 w-10 h-10 p-[6px] md:w-14 md:h-14 md:p-2"
             onClick={() => {
               const sectionYPos = topSectionRef?.current?.getBoundingClientRect().y;
               window.scrollBy({ top: sectionYPos, left: 0, behavior: "smooth" });
