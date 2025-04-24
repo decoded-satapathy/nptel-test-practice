@@ -1,7 +1,6 @@
 import { Check, CircleX } from "lucide-react";
 import React from "react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Analytics } from "@vercel/analytics/react"
 
 interface QuestionCardProps {
   question: string;
