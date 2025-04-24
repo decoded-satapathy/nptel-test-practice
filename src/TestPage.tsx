@@ -204,7 +204,7 @@ function TestPage({ subjectName, questionList }: { subjectName: string, question
                 Correct : {totalCorrectAnswers}/{totalQuestions}
               </div>
               <div>
-                {(totalCorrectAnswers / totalQuestions) * 100}% Correct
+                {((totalCorrectAnswers / totalQuestions) * 100).toFixed(1)}% Correct
               </div>
             </p>
             <p className="bg-red-500 rounded-lg py-2 px-4 shadow-2xl shadow-black/70 text-sm md:text-lg font-bold">
@@ -212,7 +212,7 @@ function TestPage({ subjectName, questionList }: { subjectName: string, question
                 Wrong : {totalWrongAnswers}/{totalQuestions}
               </div>
               <div>
-                {(totalWrongAnswers / totalQuestions) * 100}% Correct
+                {((totalWrongAnswers / totalQuestions) * 100).toFixed(1)}% Correct
               </div>
             </p>
           </div>}
